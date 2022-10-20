@@ -7,8 +7,8 @@ int main()
     while(1)
     {
         led1 = 0;
-        wait(1);
+        wait(0.5);
         led1 = 1;
-        wait(1);
+        wait(2);
     }
 }

@@ -7,6 +7,8 @@
 
 BUILD_DIR = ./build
 
+BIN_NAME = $(TARGET)-$(PROJ)
+
 # -------- Include config.mk file fom project --------------------------
 include ./apps/$(PROJ)/config.mk
 # ----------------------------------------------------------------------
@@ -14,6 +16,8 @@ include ./apps/$(PROJ)/config.mk
 MODULES=$(sort $(dir $(wildcard ./libs/*/)))
 
 PROJ_PATH=./apps/$(PROJ)/
+
+TARGET_PATH=./target/$(TARGET)/
 
 ###############################################################################
 #
@@ -24,95 +28,10 @@ CXXSRC=$(wildcard ./apps/$(PROJ)/*.cpp)
 OBJECTS += $(CXXSRC:%.cpp=%.o) $(SRC:%.c=%.o)
 OBJECTS += ./funcs.o
 
-###############################################################################
-#
-# Other object files required.
-#
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogin_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/analogout_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/can_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/cmsis_nvic.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/ethernet_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/gpio_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/gpio_irq_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/i2c_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/mbed_board.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/mbed_retarget.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/pinmap.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/port_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/pwmout_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/rtc_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/serial_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/sleep.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/spi_api.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/startup_LPC17xx.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/system_LPC17xx.o
-SYS_OBJECTS += ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/us_ticker.o
-
-###############################################################################
-#
-# Paths to the required headers.
-#
-MBED_INCLUDE_PATHS += -I./mbed
-MBED_INCLUDE_PATHS += -I./mbed/drivers
-MBED_INCLUDE_PATHS += -I./mbed/hal
-MBED_INCLUDE_PATHS += -I./mbed/platform
-MBED_INCLUDE_PATHS += -I./mbed/TARGET_LPC1768
-MBED_INCLUDE_PATHS += -I./mbed/TARGET_LPC1768/TARGET_NXP
-MBED_INCLUDE_PATHS += -I./mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/
-MBED_INCLUDE_PATHS += -I./mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/device
-MBED_INCLUDE_PATHS += -I./mbed/TARGET_LPC1768/TARGET_NXP/TARGET_LPC176X/TARGET_MBED_LPC1768
-
 INCLUDE_PATHS += -I./
-INCLUDE_PATHS += $(MBED_INCLUDE_PATHS)
 INCLUDE_PATHS += $(foreach m, $(MODULES), -I$(m)/inc) 
 INCLUDE_PATHS += -I$(PROJ_PATH)/inc 
 INCLUDE_PATHS += -I$(PROJ_PATH)/ $(INCLUDES)
-
-###############################################################################
-#
-# Paths to the required libraries.
-#
-LIBRARY_PATHS += -L./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM
-LIBRARIES = -lmbed
-
-###############################################################################
-#
-# Linker script used to build the binary.
-#
-LINKER_SCRIPT = ./mbed/TARGET_LPC1768/TOOLCHAIN_GCC_ARM/LPC1768.ld
-
-###############################################################################
-#
-# CPU info.
-#
-CPU += -mcpu=cortex-m3 
-CPU += -mthumb
-
-###############################################################################
-#
-# Common flags and symbols used by the compiler for all the examples.
-#
-COMMON_FLAGS += $(CPU)
-COMMON_FLAGS += -c
-COMMON_FLAGS += -g
-COMMON_FLAGS += -Wall
-COMMON_FLAGS += -fno-common
-COMMON_FLAGS += -fmessage-length=0
-COMMON_FLAGS += -fno-exceptions
-COMMON_FLAGS += -fno-builtin
-COMMON_FLAGS += -ffunction-sections
-COMMON_FLAGS += -fdata-sections
-COMMON_FLAGS += -funsigned-char
-COMMON_FLAGS += -fno-delete-null-pointer-checks
-COMMON_FLAGS += -fomit-frame-pointer
-COMMON_FLAGS += -MMD
-COMMON_FLAGS += -MP
-
-C_COMMON_FLAGS += -std=gnu99
-CPP_COMMON_FLAGS += -fno-rtti
-CPP_COMMON_FLAGS += -include mbed_config.h
-CPP_COMMON_FLAGS += -std=gnu++98
 
 ###############################################################################
 #
@@ -126,38 +45,6 @@ else
   COMMON_FLAGS += -DNDEBUG
   COMMON_FLAGS += -Os
 endif
-
-###############################################################################
-#
-# Flags and symbols required by the compiler.
-#
-CC_SYMBOLS += -DTARGET_LPC1768
-CC_SYMBOLS += -DTARGET_M3
-CC_SYMBOLS += -DTARGET_NXP
-CC_SYMBOLS += -DTARGET_LPC176X
-CC_SYMBOLS += -DTARGET_MBED_LPC1768
-CC_SYMBOLS += -DTOOLCHAIN_GCC_ARM
-CC_SYMBOLS += -DTOOLCHAIN_GCC
-CC_SYMBOLS += -D__CORTEX_M3
-CC_SYMBOLS += -DARM_MATH_CM3
-CC_SYMBOLS += -DMBED_BUILD_TIMESTAMP=1414254042.69
-CC_SYMBOLS += -D__MBED__=1
-
-###############################################################################
-#
-# Flags and symbols required by the linker.
-#
-LD_FLAGS += $(CPU)
-LD_FLAGS += -Wl,--gc-sections
-LD_FLAGS += -u _printf_float
-LD_FLAGS += -u _scanf_float
-
-LD_SYS_LIBS += -lstdc++
-LD_SYS_LIBS += -lsupc++
-LD_SYS_LIBS += -lm
-LD_SYS_LIBS += -lc
-LD_SYS_LIBS += -lgcc
-LD_SYS_LIBS += -lnosys
 
 ############################################################################### 
 GCC_BIN =
@@ -176,13 +63,19 @@ SIZE    = $(GCC_BIN)arm-none-eabi-size
 
 ###############################################################################
 #
+# Include target Makefile.
+#
+-include $(TARGET_PATH)/module.mk
+
+###############################################################################
+#
 # Rules to build the example programs.
 #
-all: $(BUILD_DIR)/$(PROJ).bin size
+all: $(BUILD_DIR)/$(BIN_NAME).bin size
 
 clean:
 	+@echo "Cleaning files..."	
-	@rm -f $(BUILD_DIR)/$(PROJ).bin $(BUILD_DIR)/$(PROJ).elf $(OBJECTS) $(DEPS)
+	@rm -f $(BUILD_DIR)/$(BIN_NAME).bin $(BUILD_DIR)/$(BIN_NAME).elf $(OBJECTS) $(DEPS)
 
 .c.o:
 	+@echo "CC: $<"
@@ -192,15 +85,15 @@ clean:
 	+@echo "CC: $<"
 	@$(CPP) $(COMMON_FLAGS) $(CPP_COMMON_FLAGS) $(CC_SYMBOLS) $(INCLUDE_PATHS) -g -o $@ $<	
 
-$(BUILD_DIR)/$(PROJ).elf: $(OBJECTS) $(SYS_OBJECTS)
+$(BUILD_DIR)/$(BIN_NAME).elf: $(OBJECTS) $(SYS_OBJECTS)
 	+@echo "Linking: $@"
 	@$(LD) $(LD_FLAGS) -T$(LINKER_SCRIPT) $(LIBRARY_PATHS) -o $@ $^ $(LIBRARIES) $(LD_SYS_LIBS)
 
-$(BUILD_DIR)/$(PROJ).bin: $(BUILD_DIR)/$(PROJ).elf
+$(BUILD_DIR)/$(BIN_NAME).bin: $(BUILD_DIR)/$(BIN_NAME).elf
 	+@echo "Binary: $@"	
 	@$(OBJCOPY) -O binary $< $@
 	
-size: $(BUILD_DIR)/$(PROJ).elf
+size: $(BUILD_DIR)/$(BIN_NAME).elf
 	$(SIZE) $<
 
 DEPS = $(OBJECTS:.o=.d) $(SYS_OBJECTS:.o=.d)
