@@ -2,6 +2,7 @@
 #
 # Other object files required.
 #
+OBJECTS += ./libs/mbed/funcs.o
 SYS_OBJECTS += $(wildcard ./target/k64f/TOOLCHAIN_GCC_ARM/*.o)
 
 ###############################################################################

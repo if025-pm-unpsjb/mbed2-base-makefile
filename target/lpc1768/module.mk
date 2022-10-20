@@ -2,6 +2,7 @@
 #
 # Other object files required.
 #
+OBJECTS += ./libs/mbed/funcs.o
 SYS_OBJECTS += $(wildcard ./target/lpc1768/TOOLCHAIN_GCC_ARM/*.o)
 
 ###############################################################################

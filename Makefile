@@ -26,7 +26,6 @@ TARGET_PATH=./target/$(TARGET)/
 SRC=$(wildcard ./apps/$(PROJ)/*.c)
 CXXSRC=$(wildcard ./apps/$(PROJ)/*.cpp)
 OBJECTS += $(CXXSRC:%.cpp=%.o) $(SRC:%.c=%.o)
-OBJECTS += ./funcs.o
 
 INCLUDE_PATHS += -I./
 INCLUDE_PATHS += $(foreach m, $(MODULES), -I$(m)/inc) 
