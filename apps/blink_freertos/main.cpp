@@ -9,7 +9,7 @@ DigitalOut led1(LED1);
 int main()
 {
 	led1 = 0;
-    xTaskCreate( task, "T1", 256, NULL, configMAX_PRIORITIES - 1, NULL );
+	xTaskCreate( task, "T1", 256, NULL, configMAX_PRIORITIES - 1, NULL );
 	vTaskStartScheduler();
 	for(;;);
 }
