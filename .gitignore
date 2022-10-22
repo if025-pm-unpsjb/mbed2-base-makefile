@@ -35,8 +35,8 @@
 *.app
 
 # mbed object files and libraries should be versioned
-!mbed/**/*.o
-!mbed/**/*.a
+!target/**/*.o
+!target/**/*.a
 
 # Eclipse project files
 .settings

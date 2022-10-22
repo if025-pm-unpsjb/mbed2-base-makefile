@@ -1,3 +1,4 @@
+#ifdef TARGET_MBED_LPC1768
 #include "LPC17xx.h"
 
 void vConfigureTimerForRunTimeStats( void )
@@ -23,3 +24,4 @@ const unsigned long TCR_COUNT_RESET = 2,
     /* Start the counter. */
     LPC_TIM1->TCR = TCR_COUNT_ENABLE;
 }
+#endif
