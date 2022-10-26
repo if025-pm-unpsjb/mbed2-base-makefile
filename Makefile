@@ -36,7 +36,7 @@ INCLUDE_PATHS += -I$(PROJ_PATH)/ $(INCLUDES)
 #
 # Flags and symbols required for debugging.
 #
-ifeq ($(DEBUG), 1)
+ifeq ($(DEBUG), y)
   COMMON_FLAGS += -DDEBUG
   COMMON_FLAGS += -Og
   COMMON_FLAGS += -ggdb3
