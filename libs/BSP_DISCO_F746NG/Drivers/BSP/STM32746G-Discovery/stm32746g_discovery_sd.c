@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32746g_discovery_sd.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    30-December-2016
   * @brief   This file includes the uSD card driver mounted on STM32746G-Discovery
   *          board.
   @verbatim
@@ -74,6 +72,16 @@
   *
   ******************************************************************************
   */ 
+
+/* Dependencies
+- stm32746g_discovery.c
+- stm32f7xx_hal_sd.c
+- stm32f7xx_ll_sdmmc.c
+- stm32f7xx_hal_dma.c  
+- stm32f7xx_hal_gpio.c
+- stm32f7xx_hal_cortex.c
+- stm32f7xx_hal_rcc_ex.h
+EndDependencies */
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32746g_discovery_sd.h"
@@ -500,7 +508,6 @@ __weak void BSP_SD_MspDeInit(SD_HandleTypeDef *hsd, void *Params)
 
 /**
   * @brief  Gets the current SD card data status.
-  * @param  None
   * @retval Data transfer state.
   *          This value can be one of the following values:
   *            @arg  SD_TRANSFER_OK: No data transfer is acting
@@ -555,7 +562,6 @@ void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
 
 /**
   * @brief BSP SD Abort callbacks
-  * @param None
   * @retval None
   */
 __weak void BSP_SD_AbortCallback(void)
@@ -565,7 +571,6 @@ __weak void BSP_SD_AbortCallback(void)
 
 /**
   * @brief BSP Tx Transfer completed callbacks
-  * @param None
   * @retval None
   */
 __weak void BSP_SD_WriteCpltCallback(void)
@@ -575,7 +580,6 @@ __weak void BSP_SD_WriteCpltCallback(void)
 
 /**
   * @brief BSP Rx Transfer completed callbacks
-  * @param None
   * @retval None
   */
 __weak void BSP_SD_ReadCpltCallback(void)
