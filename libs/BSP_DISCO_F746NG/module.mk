@@ -1,0 +1,10 @@
+ifeq ($(USE_BSP_DISCO_F746NG),y)
+
+BSP_DISCO_F746NG_BASE=./libs/BSP_DISCO_F746NG
+
+SRC+=$(wildcard $(LCD_DISCO_F746NG_BASE)/Utilities/Font*.c)
+SRC+=$(wildcard $(LCD_DISCO_F746NG_BASE)/BSP/STM32*.c)
+
+INCLUDE_PATHS += -I$(LCD_DISCO_F746NG_BASE)/Utilities/Font
+
+endif
