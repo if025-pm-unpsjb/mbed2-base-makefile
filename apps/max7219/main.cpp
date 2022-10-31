@@ -12,22 +12,22 @@ int hf[8] = {0b00111100, 0b01000010, 0b10010101, 0b10100001, 0b10100001, 0b10010
 
 int main()
 {
-	 max7219_configuration_t cfg = {
-			 .device_number = 0,
-	         .decode_mode = 0,
-	         .intensity = Max7219::MAX7219_INTENSITY_5,
-	         .scan_limit = Max7219::MAX7219_SCAN_8
-	     };
+        max7219_configuration_t cfg = {
+                        .device_number = 0,
+                        .decode_mode = 0,
+                        .intensity = Max7219::MAX7219_INTENSITY_5,
+                        .scan_limit = Max7219::MAX7219_SCAN_8
+        };
 
-	     max7219.init_device(cfg);
-	     max7219.enable_device(1);
+        max7219.init_device(cfg);
+        max7219.enable_device(1);
 
-	     wait(5);
+        wait(5);
 
-	     max7219.device_all_off(1);
-	             for (int i = 1; i <= 8; i++) {
-	               max7219.write_digit(1, i, hf[i-1]);
-	             }
+        max7219.device_all_off(1);
+        for (int i = 1; i <= 8; i++) {
+                max7219.write_digit(1, i, hf[i-1]);
+        }
 
     while(1)
     {

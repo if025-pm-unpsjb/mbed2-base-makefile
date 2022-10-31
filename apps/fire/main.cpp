@@ -55,6 +55,13 @@ char firePixels[WIDTH*HEIGHT];
 
 int main()
 {
+        lcd.Clear(LCD_COLOR_BLACK);
+        lcd.SetBackColor(LCD_COLOR_BLACK);
+        lcd.SetTextColor(LCD_COLOR_WHITE);
+        lcd.DisplayStringAt(0, LINE(5), (uint8_t *)"FIRE!", CENTER_MODE);
+
+        wait(5);
+
         for(int i = 0; i < WIDTH*HEIGHT; i++) {
                 firePixels[i] = 0;
         }
@@ -71,7 +78,7 @@ int main()
                                 if (pixel == 0) {
                                         firePixels[src - WIDTH] = 0;
                                 } else {
-                                        int r = rand() % 3;
+                                        int r = (rand() % 3) & 3;
                                         int dst = src - r + 1;
                                         firePixels[dst - WIDTH] = pixel - (r&1);
                                 }
