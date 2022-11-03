@@ -1,0 +1,19 @@
+# Project
+PROJ_NAME=slack_freertos
+
+# Compile options
+
+VERBOSE=n
+OPT=g
+USE_NANO=y
+SEMIHOST=n
+USE_FPU=y
+
+# Libraries
+USE_SLACK=y
+USE_TRACEALYZER=n
+
+## FreeRTOS
+USE_FREERTOS=y
+FREERTOS_VERSION=10.4.6
+FREERTOS_HEAP_TYPE=1
