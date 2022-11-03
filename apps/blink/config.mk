@@ -1,3 +1,6 @@
+# Project
+PROJ_NAME=blink
+
 # Compile options
 
 VERBOSE=n

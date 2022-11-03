@@ -1,5 +1,7 @@
-# Compile options
+# Project
+PROJ_NAME=blink_freertos_trace
 
+# Compile options
 VERBOSE=n
 OPT=g
 USE_NANO=y
@@ -8,8 +10,9 @@ USE_FPU=y
 DEBUG=y
 
 # Libraries
+USE_TRACEALYZER=y
 
 ## FreeRTOS
 USE_FREERTOS=y
+FREERTOS_VERSION=10.4.6
 FREERTOS_HEAP_TYPE=1
-USE_TRACEALYZER=y

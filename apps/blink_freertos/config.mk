@@ -1,3 +1,6 @@
+# Project
+PROJ_NAME=blink_freertos
+
 # Compile options
 
 VERBOSE=n
@@ -7,7 +10,9 @@ SEMIHOST=n
 USE_FPU=y
 
 # Libraries
+USE_SLACK=n
 
 ## FreeRTOS
 USE_FREERTOS=y
+FREERTOS_VERSION=10.4.6
 FREERTOS_HEAP_TYPE=1
