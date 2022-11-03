@@ -101,7 +101,7 @@ DigitalOut leds[] = { LED1, LED1, LED1, LED1 };
 
 DigitalOut ledR(p23);
 
-#if TZ == 1
+#ifdef USE_TRACEALIZER
 traceString slack_channel;
 #endif
 
@@ -133,7 +133,7 @@ static void vAperiodicTask( void* params )
 
     for(;;)
     {
-        #if TZ == 1
+        #ifdef USE_TRACEALIZER
         vTracePrintF( slack_channel, "%d - %d", xSlackGetAvailableSlack(), pxTaskSsTCB->xSlack );
         #endif
 
@@ -163,7 +163,7 @@ static void vAperiodicTask( void* params )
             xSemaphoreGive( xMutex );
         }
 
-        #if TZ == 1
+        #ifdef USE_TRACEALIZER
         vTracePrintF( slack_channel, "%d - %d", xSlackGetAvailableSlack(), pxTaskSsTCB->xSlack );
         #endif
 
@@ -185,7 +185,7 @@ static void vPeriodicTask( void* params )
 
     for(;;)
     {
-        #if TZ == 1
+        #ifdef USE_TRACEALIZER
         vTracePrintF( slack_channel, "%d - %d", xSlackGetAvailableSlack(), pxTaskSsTCB->xSlack );
         #endif
 
@@ -237,7 +237,7 @@ static void vPeriodicTask( void* params )
             xSemaphoreGive( xMutex );
         }
 
-        #if TZ == 1
+        #ifdef USE_TRACEALIZER
         vTracePrintF( slack_channel, "%d - %d", xSlackGetAvailableSlack(), pxTaskSsTCB->xSlack );
         #endif
 
@@ -263,7 +263,7 @@ int main(void)
 #ifdef USE_TRACEALIZER
     // Initializes the trace recorder, but does not start the tracing.
     vTraceEnable( TRC_INIT );
-    //slack_channel = xTraceRegisterString("Slack Events");
+    slack_channel = xTraceRegisterString("Slack Events");
 #endif
 
     display.splash();
