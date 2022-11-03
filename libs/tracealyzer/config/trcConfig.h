@@ -73,6 +73,9 @@ extern "C" {
 #ifdef TARGET_LM3S6965EVB
 #include "chip.h"
 #endif
+#ifdef TARGET_STM32F7
+#include "stm32f746xx.h"
+#endif
 
 /*******************************************************************************
  * Configuration Macro: TRC_CFG_HARDWARE_PORT
