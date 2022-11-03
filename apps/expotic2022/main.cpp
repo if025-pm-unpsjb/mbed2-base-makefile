@@ -221,7 +221,11 @@ static void vPeriodicTask( void* params )
             turn = (turn + 1) % 5;
         }
 
-        xRndRun = (UBaseType_t) rand() % ( pxTaskSsTCB->xWcet - 300 );
+        if (taskId == 1) {
+            xRndRun = (UBaseType_t) rand() % ( pxTaskSsTCB->xWcet - 400 );
+        } else {
+            xRndRun = (UBaseType_t) rand() % ( pxTaskSsTCB->xWcet - 300 );
+        }
         vUtilsBusyWait( xRndRun );
 
         leds[ taskId - 1] = 0;
