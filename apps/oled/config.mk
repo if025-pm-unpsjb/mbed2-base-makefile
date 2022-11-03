@@ -1,3 +1,6 @@
+# Project
+PROJ_NAME=oled
+
 # Compile options
 
 VERBOSE=n

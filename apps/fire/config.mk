@@ -1,3 +1,6 @@
+# Project
+PROJ_NAME=fire
+
 # Compile options
 
 VERBOSE=n
